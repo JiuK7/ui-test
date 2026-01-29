@@ -40,11 +40,6 @@
           Why I'm asking
         </h1>
 
-
-        <!-- Navigation -->
-        <button id="timelinePrev" class="timeline-nav">←</button>
-        <button id="timelineNext" class="timeline-nav">→</button>
-
         <!-- Viewport -->
         <div class="timeline-viewport">
         <div class="timeline-line"></div>
@@ -53,18 +48,39 @@
             <!-- Timeline point -->
             <div class="timeline-point" data-index="0">
             <div class="point-marker"></div>
-            <div class="point-image">📸</div>
+            <div class="point-image">😧</div>
             </div>
 
             <div class="timeline-point" data-index="1">
             <div class="point-marker"></div>
-            <div class="point-image">🎧</div>
+            <div class="point-image">🖋️</div>
             </div>
 
             <div class="timeline-point" data-index="2">
             <div class="point-marker"></div>
-            <div class="point-image">✨</div>
+            <div class="point-image">🥘</div>
             </div>
+
+            <div class="timeline-point" data-index="4">
+              <div class="point-marker"></div>
+              <div class="point-image">🙉</div>
+            </div>
+
+            <div class="timeline-point" data-index="5">
+              <div class="point-marker"></div>
+              <div class="point-image">🔫</div>
+            </div>
+
+            <div class="timeline-point" data-index="6">
+              <div class="point-marker"></div>
+              <div class="point-image">🖥️</div>
+            </div>
+
+            <div class="timeline-point timeline-final" data-index="7">
+              <div class="point-marker"></div>
+              <div class="point-image">💗</div>
+            </div>
+
 
             <!-- Final point -->
             <div class="timeline-point timeline-final" data-index="3">
@@ -76,7 +92,13 @@
         </div>
 
         <!-- Bubble -->
-        <div id="timelineBubble" class="timeline-bubble hidden"></div>
+        <div id="timelineBubble" class="timeline-popover hidden">
+          <div class="popover-image">
+            <img id="timelineBubbleImg" src="" alt="" />
+          </div>
+          <div id="timelineBubbleText" class="timeline-bubble"></div>
+        </div>
+
 
         <button id="timelineCTA" class="timeline-cta hidden">
         Time for the big question →

@@ -1,10 +1,10 @@
 (() => {
   const track = document.getElementById("timelineTrack");
   const bubble = document.getElementById("timelineBubble");
+  const bubbleText = document.getElementById("timelineBubbleText");
+  const bubbleImg = document.getElementById("timelineBubbleImg");
   const points = Array.from(document.querySelectorAll(".timeline-point"));
 
-  const prevBtn = document.getElementById("timelinePrev");
-  const nextBtn = document.getElementById("timelineNext");
   const cta = document.getElementById("timelineCTA");
   const phase2 = document.getElementById("phase2");
   const phase3 = document.getElementById("phase3");
@@ -23,12 +23,42 @@
 
   let currentIndex = 0;
 
-  const TEXT = [
-    "This day was lowkey one of my favourites.",
-    "You made this way more fun than it should’ve been.",
-    "Still think about this sometimes.",
-    "Okay… time for the big question."
+  const POINTS = [
+    {
+      text: `I went from thank fck she's not a catfish,
+       to oh sht she's acc pretty
+       to oh sht idk what to say
+       to thank fck she's a yapper
+       to oh I'm really enjoying spending time with her
+       to I gotta stay awake!
+       (*≧ω≦)`,
+    },
+    {
+      text: "I already know how to write your name",
+      image: "assets/phase2/huanyi.png"
+    },
+    {
+      text: "You already liked food I made^",
+    },
+    {
+      text: "I haven't ragebaited you on overcooked yet",
+    },
+    {
+      text: "I need to boost your acs",
+      image: "assets/phase2/24acs.png"
+    },
+    {
+      text: "I'm using my computer science for a valentines date ㅠㅠ",
+    },
+    {
+      text: `My bad we met on Hinge
+      we can make up a new origin story together`,
+    },
+    {
+      text: `Time for the big question...`,
+    }
   ];
+
 
   function centerPoint(point) {
     const viewport = document.querySelector(".timeline-viewport");
@@ -56,22 +86,35 @@
 
 
   function showBubble(index) {
-    bubble.textContent = TEXT[index];
+    const point = POINTS[index];
+
+    bubbleText.textContent = point.text;
+
+    if (point.image) {
+      bubbleImg.src = point.image;
+      bubbleImg.style.display = "block";
+      bubble.classList.remove("no-image");
+    } else {
+      bubbleImg.src = "";
+      bubbleImg.style.display = "none";
+      bubble.classList.add("no-image");
+    }
 
     bubble.classList.remove("show");
-    void bubble.offsetWidth;
+    void bubble.offsetWidth; // restart animation
     bubble.classList.add("show");
     bubble.classList.remove("hidden");
 
-    // Show CTA only on final point
     if (index === points.length - 1) {
-        cta.classList.remove("hidden");
-        requestAnimationFrame(() => cta.classList.add("show"));
+      cta.classList.remove("hidden");
+      requestAnimationFrame(() => cta.classList.add("show"));
     } else {
-        cta.classList.remove("show");
-        cta.classList.add("hidden");
+      cta.classList.remove("show");
+      cta.classList.add("hidden");
     }
-    }
+  }
+
+
 
 
 
@@ -91,18 +134,4 @@
     });
     });
 
-
-  prevBtn.addEventListener("click", () => {
-    if (currentIndex > 0) {
-      currentIndex--;
-      updateTrack();
-    }
-  });
-
-  nextBtn.addEventListener("click", () => {
-    if (currentIndex < points.length - 1) {
-      currentIndex++;
-      updateTrack();
-    }
-  });
 })();
