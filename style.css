@@ -290,13 +290,6 @@ body{
 
 
 /* Bubble */
-.timeline-bubble {
-  margin-top: 24px;
-  padding: 18px 22px;
-  max-width: 420px;
-  background: rgba(255,255,255,0.08);
-  border-radius: 16px;
-}
 
 .hidden {
   display: none;
@@ -411,10 +404,6 @@ body{
     filter 0.8s ease;
 }
 
-/* soft fade */
-#background.fade-out {
-  opacity: 0;
-}
 
 .bg-layer {
   position: fixed;
