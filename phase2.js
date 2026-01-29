@@ -1,9 +1,9 @@
 (() => {
   const track = document.getElementById("timelineTrack");
+  const popover = document.getElementById("timelinePopover");
+  const popoverText = document.getElementById("timelinePopoverText");
+  const popoverImg = document.getElementById("timelinePopoverImg");
 
-  const bubble = document.getElementById("timelineBubble");
-  const bubbleText = document.getElementById("timelineBubbleText");
-  const bubbleImg = document.getElementById("timelineBubbleImg");
 
   const cta = document.getElementById("timelineCTA");
 
@@ -64,29 +64,21 @@ we can make up a new origin story together`,
     const point = POINTS[index];
     if (!point) return;
 
-    bubbleText.textContent = point.text;
+    popoverText.textContent = point.text;
 
     if (point.image) {
-      bubbleImg.src = point.image;
-      bubbleImg.style.display = "block";
+      popoverImg.src = point.image;
+      popover.parentElement.classList.remove("no-image");
     } else {
-      bubbleImg.src = "";
-      bubbleImg.style.display = "none";
+      popoverImg.src = "";
+      popover.parentElement.classList.add("no-image");
     }
 
-    bubble.classList.remove("show");
-    void bubble.offsetWidth; // restart animation
-    bubble.classList.add("show");
-    bubble.classList.remove("hidden");
-
-    if (index === POINTS.length - 1) {
-      cta.classList.remove("hidden");
-      requestAnimationFrame(() => cta.classList.add("show"));
-    } else {
-      cta.classList.remove("show");
-      cta.classList.add("hidden");
-    }
+    popover.classList.remove("hidden", "show");
+    void popover.offsetWidth; // restart animation
+    popover.classList.add("show");
   }
+
 
   function goToIndex(index) {
     const clamped = Math.max(0, Math.min(index, POINTS.length - 1));
@@ -100,6 +92,15 @@ we can make up a new origin story together`,
 
     target.classList.add("active");
     centerPoint(target);
+    const rect = target.getBoundingClientRect();
+    const viewportRect = document
+      .querySelector(".timeline-viewport")
+      .getBoundingClientRect();
+
+    popover.style.position = "absolute";
+    popover.style.left = `${rect.left - viewportRect.left}px`;
+    popover.style.top = `220px`;
+
     showBubble(clamped);
   }
 
