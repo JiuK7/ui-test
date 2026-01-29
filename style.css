@@ -425,15 +425,17 @@ body{
 
 
 .timeline-popover {
-  position: relative;
+  margin: 24px auto 0 auto;
   display: flex;
   gap: 16px;
   align-items: flex-start;
+  max-width: 720px;
 
   opacity: 0;
   transform: translateY(12px);
   pointer-events: none;
 }
+
 
 .timeline-popover.show {
   opacity: 1;
@@ -461,4 +463,9 @@ body{
 
 .timeline-popover.no-image .popover-image {
   display: none;
+}
+
+#timelinePopoverText {
+  white-space: pre-line;
+  line-height: 1.45;
 }

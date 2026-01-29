@@ -68,10 +68,10 @@ we can make up a new origin story together`,
 
     if (point.image) {
       popoverImg.src = point.image;
-      popover.parentElement.classList.remove("no-image");
+      popover.classList.remove("no-image");
     } else {
       popoverImg.src = "";
-      popover.parentElement.classList.add("no-image");
+      popover.classList.add("no-image");
     }
 
     popover.classList.remove("hidden", "show");
@@ -96,10 +96,6 @@ we can make up a new origin story together`,
     const viewportRect = document
       .querySelector(".timeline-viewport")
       .getBoundingClientRect();
-
-    popover.style.position = "absolute";
-    popover.style.left = `${rect.left - viewportRect.left}px`;
-    popover.style.top = `220px`;
 
     showBubble(clamped);
   }
