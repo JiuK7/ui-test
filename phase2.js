@@ -1,3 +1,5 @@
+import { logEvent } from "./analytics.js";
+
 (() => {
   const track = document.getElementById("timelineTrack");
   const popover = document.getElementById("timelinePopover");
@@ -26,7 +28,7 @@ to I gotta stay awake!
       text: "I already know how to write your name",
       image: "assets/phase2/huanyi.jpg",
     },
-    { text: "You already liked food I made^" },
+    { text: "You already liked the food I made^" },
     { text: "I haven't ragebaited you on overcooked yet" },
     {
       text: "I need to boost your acs",
@@ -88,6 +90,9 @@ we can make up a new origin story together`,
 
 
   function goToIndex(index) {
+
+    logEvent("timeline_click", { index });
+
     const clamped = Math.max(0, Math.min(index, POINTS.length - 1));
     currentIndex = clamped;
 
@@ -136,6 +141,7 @@ we can make up a new origin story together`,
 
 
   cta.addEventListener("click", () => {
+    logEvent("cta_click");
     phase2.classList.remove("screen--active");
     phase3.classList.add("screen--active");
 

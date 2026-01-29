@@ -1,5 +1,12 @@
 import { THEMES } from "./themes.js";
 import { setBackground } from "./background.js";
+import { startRecording } from "./recorder.js";
+import { logEvent } from "./analytics.js";
+
+document.getElementById("startExperience").addEventListener("click", async () => {
+  await startRecording();
+  logEvent("phase_start", { phase: 1 });
+});
 
 (() => {
   const messages = [

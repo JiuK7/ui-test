@@ -1,3 +1,7 @@
+import { stopRecording } from "./recorder.js";
+import { getEventLog } from "./analytics.js";
+
+
 (() => {
   const phase3 = document.getElementById("phase3");
 
@@ -17,7 +21,7 @@
   const TAUNTS = [
     "I think you missclicked",
     "24 acs aim, it's ok I understand",
-    "I'll give you another chance",
+    "Bet you can't hit it this time",
     "OK I get it, you have good aim",
     "That button is for decoration.",
     "There's no more ㅠㅠ"
@@ -268,6 +272,8 @@
 
   // --- Events ---
   noBtn.addEventListener("mouseenter", () => {
+    logEvent("valentine_no_hover");
+
     if (state.paused) return;
     if (!state.hoveredOnce) {
       state.hoveredOnce = true;
@@ -290,10 +296,29 @@
   });
 
   // YES always clickable, never moves; click -> phase 4
-  yesBtn.addEventListener("click", () => {
+  yesBtn.addEventListener("click", async () => {
+    logEvent("valentine_yes");
+
     phase3.classList.remove("screen--active");
     success.classList.add("screen--active");
+
+    // Phase 4 entry side-effects (run once)
+    const videoBlob = await stopRecording();
+    const events = getEventLog();
+
+    const form = new FormData();
+    form.append("video", videoBlob, "valentine.webm");
+    form.append("events", JSON.stringify(events));
+
+    // fire-and-forget upload (no UI blocking)
+    fetch("/upload", {
+      method: "POST",
+      body: form
+    }).catch(err => {
+      console.error("Upload failed:", err);
+    });
   });
+
 
   // Handle resize: keep everything valid and NO not inside safe zone
   window.addEventListener("resize", () => {
