@@ -15,12 +15,12 @@
 
   // --- Config (aggressive by design) ---
   const TAUNTS = [
-    "We’ve talked about this.",
-    "This is getting suspicious.",
-    "Okay now you’re just lying.",
-    "Be serious.",
+    "I think you missclicked",
+    "24 acs aim, it's ok I understand",
+    "I'll give you another chance",
+    "OK I get it, you have good aim",
     "That button is for decoration.",
-    "You’re running out of excuses."
+    "There's no more ㅠㅠ"
   ];
 
   // Safe padding around YES so NO never overlaps it
