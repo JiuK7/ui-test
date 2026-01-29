@@ -388,3 +388,21 @@ body{
 #background.fade-out {
   opacity: 0;
 }
+
+.bg-layer {
+  position: fixed;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: opacity 0.8s ease;
+  z-index: -1;
+}
+
+.bg-layer.hidden {
+  opacity: 0;
+}
+
+.bg-layer.visible {
+  opacity: 1;
+}

@@ -1,43 +1,50 @@
-const globalBackground = document.getElementById("globalBackground");
+const bgA = document.getElementById("bgA");
+const bgB = document.getElementById("bgB");
 
+let activeBg = bgA;
+let inactiveBg = bgB;
 let currentVideo = null;
 
 export function setBackground({ type, src }) {
-  globalBackground.classList.add("fade-out");
+  // Prepare inactive layer
+  if (currentVideo) {
+    currentVideo.remove();
+    currentVideo = null;
+  }
 
-  setTimeout(() => {
-    if (currentVideo) {
-      currentVideo.remove();
-      currentVideo = null;
-    }
+  if (type === "image") {
+    inactiveBg.style.backgroundImage = `url(${src})`;
+  }
 
-    if (type === "image") {
-      globalBackground.style.backgroundImage = `url(${src})`;
-    }
+  if (type === "video") {
+    inactiveBg.style.backgroundImage = "none";
 
-    if (type === "video") {
-      globalBackground.style.backgroundImage = "none";
+    const video = document.createElement("video");
+    video.src = src;
+    video.autoplay = true;
+    video.loop = true;
+    video.muted = true;
+    video.playsInline = true;
 
-      const video = document.createElement("video");
-      video.src = src;
-      video.autoplay = true;
-      video.loop = true;
-      video.muted = true;
-      video.playsInline = true;
+    video.style.cssText = `
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    `;
 
-      video.style.cssText = `
-        position:absolute;
-        inset:0;
-        width:100%;
-        height:100%;
-        object-fit:cover;
-        z-index:-1;
-      `;
+    inactiveBg.appendChild(video);
+    currentVideo = video;
+  }
 
-      globalBackground.appendChild(video);
-      currentVideo = video;
-    }
+  // Crossfade
+  inactiveBg.classList.add("visible");
+  inactiveBg.classList.remove("hidden");
 
-    globalBackground.classList.remove("fade-out");
-  }, 400);
+  activeBg.classList.remove("visible");
+  activeBg.classList.add("hidden");
+
+  // Swap layers
+  [activeBg, inactiveBg] = [inactiveBg, activeBg];
 }
