@@ -41,6 +41,13 @@ we can make up a new origin story together`,
   ];
 
   let currentIndex = 0;
+  let ctaTimer = null;
+
+  function setCTAEnabled(enabled) {
+    cta.disabled = !enabled;
+    cta.style.pointerEvents = enabled ? "auto" : "none";
+  }
+
 
   function centerPoint(pointEl) {
     const viewport = document.querySelector(".timeline-viewport");
@@ -98,6 +105,26 @@ we can make up a new origin story together`,
       .getBoundingClientRect();
 
     showBubble(clamped);
+    // CTA visibility — only show on final point
+    if (currentIndex === POINTS.length - 1) {
+      clearTimeout(ctaTimer);
+      setCTAEnabled(false);
+      cta.classList.add("hidden");
+
+      ctaTimer = setTimeout(() => {
+        setCTAEnabled(true);
+        cta.classList.remove("hidden");
+        cta.classList.add("show");
+      }, 320);
+    } else {
+      clearTimeout(ctaTimer);
+      setCTAEnabled(false);
+      cta.classList.remove("show");
+      cta.classList.add("hidden");
+    }
+
+
+
   }
 
   points.forEach(pointEl => {
@@ -116,6 +143,15 @@ we can make up a new origin story together`,
       window.initPhase3();
     });
   });
+
+  cta.addEventListener("mouseenter", () => {
+    cta.textContent = cta.dataset.hover;
+  });
+
+  cta.addEventListener("mouseleave", () => {
+    cta.textContent = cta.dataset.default;
+  });
+
 
   // optional: start on first point
   goToIndex(0);
