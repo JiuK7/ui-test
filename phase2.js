@@ -26,7 +26,7 @@ to I gotta stay awake!
       text: "I already know how to write your name",
       image: "assets/phase2/huanyi.jpg",
     },
-    { text: "You already liked food I made^" },
+    { text: "You already bit me and the hickey's still there" },
     { text: "I haven't ragebaited you on overcooked yet" },
     {
       text: "I need to boost your acs",
@@ -34,10 +34,10 @@ to I gotta stay awake!
     },
     { text: "I'm using my computer science for a valentines date ㅠㅠ" },
     {
-      text: `My bad we met on Hinge
-we can make up a new origin story together`,
+      text: `We met on valorant
+     (not much better than Hinge but it'll do)`,
     },
-    { text: "Time for the big question..." },
+    { text: "Question time..." },
   ];
 
   let currentIndex = 0;
