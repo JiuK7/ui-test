@@ -33,7 +33,7 @@
   // By ~5 resets, YES is huge.
   const YES_SCALE_MULT = 1.55; // per round
   const NO_SCALE_MULT = 0.78;  // per round
-  const SPEED_MULT = 1.2;     // per round
+  const SPEED_MULT = 1;     // per round
 
   // --- State ---
   const state = {
